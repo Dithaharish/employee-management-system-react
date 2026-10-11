@@ -1,0 +1,388 @@
+========================================================================
+PEOPLEDESK - EMPLOYEE MANAGEMENT SYSTEM (React)
+Complete Guide for Office Team Members
+========================================================================
+
+This document explains what this project is, what software you need
+to install, how to run it, and how to use it. No prior React
+knowledge is required.
+
+
+========================================================================
+1. WHAT IS THIS PROJECT?
+========================================================================
+
+It is an Employee Management System (internal company portal) called
+"PeopleDesk". It is a website that has two types of users:
+
+  - ADMIN  (HR / management)
+      Can view the dashboard, see all employees, add new employees,
+      edit employee details, manage departments, and update their own
+      profile and password.
+
+  - EMPLOYEE (staff)
+      Can view their own dashboard, view/complete their profile, and
+      change their own password.
+
+TECHNOLOGY USED
+  - React 18          - the JavaScript library used to build the screens
+  - React Router DOM  - handles page navigation (URLs)
+  - Vite 5            - the development tool that runs the project and
+                        bundles it for production
+  - JavaScript (JSX)  - the programming language used
+  - HTML / CSS        - page structure and styling
+  - localStorage      - browser storage used to save all data
+                        (no database or server needed)
+
+IMPORTANT NOTE ABOUT DATA
+  All data is stored inside the web browser's localStorage. This means:
+    - There is NO backend server and NO database.
+    - Data saved by one person is visible ONLY in that browser and
+      computer. It is not shared between different users/computers.
+    - If you clear browser data (cache/cookies/site data), all saved
+      changes are lost and the app resets to the built-in sample data.
+
+
+========================================================================
+2. SOFTWARE YOU NEED TO INSTALL (do this once per computer)
+========================================================================
+
+A. NODE.js (required)
+   This is the only program you must install to run the project.
+   It includes npm, the tool that downloads/copies project files.
+
+   Download link: https://nodejs.org
+   Choose the "LTS" (Long Term Support) version (e.g. 20.x LTS).
+   Run the installer and click Next/Install with the default options.
+
+   How to verify the installation:
+     1. Open Command Prompt (cmd) or PowerShell.
+     2. Type:  node --version
+        You should see something like v20.x.x
+     3. Type:  npm --version
+        You should see something like 10.x.x
+
+B. A CODE EDITOR (optional, only if you want to view/edit the code)
+   Recommended: Visual Studio Code
+   Download link: https://code.visualstudio.com
+
+C. A WEB BROWSER (you already have one)
+   Recommended: Google Chrome or Microsoft Edge.
+   The app runs at http://localhost:5173 and opens in your browser.
+
+D. GIT (optional, only if you want to clone from a repository)
+   Download link: https://git-scm.com/downloads
+
+
+========================================================================
+3. HOW TO GET THE PROJECT FOLDER
+========================================================================
+
+Option A - You already have the folder (normal for office PCs):
+    The project folder is already present at:
+        C:\Users\SK\employee-management-system-react
+    (Your machine may have it in a different path - use that path.)
+
+Option B - Clone from a Git repository:
+    Open Command Prompt and run:
+        git clone <repository-url>
+        cd employee-management-system-react
+
+
+========================================================================
+4. HOW TO RUN THE PROJECT (step by step)
+========================================================================
+
+STEP 1: Open a terminal
+    - Windows: Press Win + R, type "cmd", press Enter.
+      (or search "Command Prompt" in the Start menu)
+
+STEP 2: Go to the project folder
+    Type the following and press Enter:
+        cd C:\Users\SK\employee-management-system-react
+    (Use the path where the project actually is on your computer.)
+
+STEP 3: Install the project files (ONLY the first time)
+    Type:
+        npm install
+    This reads package.json and downloads all required libraries
+    into the "node_modules" folder. It may take 1-5 minutes.
+    You only do this once per computer.
+    (If the folder already contains node_modules, you can skip this.)
+
+STEP 4: Start the development server
+    Type:
+        npm run dev
+    You will see output similar to:
+        VITE v5.4.21  ready in 976 ms
+        Local:   http://localhost:5173/
+
+STEP 5: Open the app in your browser
+    Go to:  http://localhost:5173
+    The login page will appear.
+
+STEP 6: Stop the server (when you are done)
+    Click on the terminal window and press:  Ctrl + C
+    Then press "Y" and Enter if asked to confirm.
+
+NOTE ABOUT PORTS:
+    Port 5173 is the default. If it is already in use, Vite will
+    automatically pick 5174, 5175, etc. - always use the exact
+    link shown in your terminal.
+
+WINDOWS POWERSHELL USERS - IMPORTANT:
+    If you use PowerShell (not Command Prompt) and see this error:
+        "npm.ps1 cannot be loaded because running scripts is
+         disabled on this system"
+    You have two easy fixes:
+      Fix 1 (recommended): Use Command Prompt (cmd) instead.
+      Fix 2: In the PowerShell command, use "npm.cmd" instead of
+             "npm" - for example:  npm.cmd run dev
+
+
+========================================================================
+5. LOGIN CREDENTIALS
+========================================================================
+
+ADMIN LOGIN
+    Email:    admin@company.com
+    Password: admin123
+    (The admin password can be changed in the app under
+     Admin -> Change Password.)
+
+EMPLOYEE LOGIN
+    All employees use the default password:  employee123
+    Sample employees already in the system:
+        rahul.sharma@company.com   /  employee123
+        priya.reddy@company.com    /  employee123
+        ananya.rao@company.com     /  employee123
+        arjun.patel@company.com    /  employee123
+        sneha.verma@company.com    /  employee123
+
+    New employees added by the admin sign in with the password
+    the admin sets for them (or the default employee123).
+
+NOTE: If a login was done before on the same browser, the session
+stays in localStorage until the user clicks Logout.
+
+
+========================================================================
+6. PAGES AND URLS (what is where)
+========================================================================
+
+  Page                     URL                              Who can open
+  ---------------------------------------------------------------------
+  Login                    /                                Everyone
+  Admin Dashboard          /admin/dashboard                 Admin
+  Employees List           /admin/employees                 Admin
+  Add Employee             /admin/employees/add             Admin
+  Edit Employee            /admin/employees/edit            Admin
+  Departments              /admin/departments               Admin
+  Add Department           /admin/departments/add           Admin
+  Admin Profile            /admin/profile                   Admin
+  Admin Change Password    /admin/change-password           Admin
+  Employee Dashboard       /employee/dashboard              Employee
+  Employee Profile         /employee/profile                Employee
+  Complete Profile         /employee/complete-profile       Employee
+  Employee Change Password /employee/change-password        Employee
+
+If someone is not logged in, or opens a page they are not allowed to
+see, the app automatically redirects them to the Login page.
+
+
+========================================================================
+7. FEATURES EXPLAINED (what you can do in the app)
+========================================================================
+
+ADMIN FEATURES
+  - Dashboard: shows total number of employees and departments,
+    a search box, and the employee list.
+  - Employees: view the full employee list and search by name.
+  - Add Employee: register a new employee (name, email, phone,
+    department, designation, joining date, address, emergency
+    contact, etc.).
+  - Edit Employee: update the details of an existing employee.
+  - Departments: view, search and manage departments
+    (name, manager, status).
+  - Add Department: create a new department.
+  - Admin Profile: view/update the admin's own profile.
+  - Change Password: change the admin login password.
+
+EMPLOYEE FEATURES
+  - Dashboard: personal overview page.
+  - Profile: view and complete personal profile details
+    (date of birth, blood group, address, city, state, postal code,
+    emergency contact, etc.).
+  - Complete Profile: shown for first-time login so the employee
+    can fill in missing details.
+  - Change Password: change the employee's own password.
+
+
+========================================================================
+8. PROJECT STRUCTURE (what each file/folder means)
+========================================================================
+
+employee-management-system-react/
+|
+|-- index.html              The single HTML page of the app
+|-- package.json            Project info + list of libraries needed
+|-- package-lock.json       Exact library versions (auto-generated)
+|-- vite.config.js          Vite settings (React plugin setup)
+|-- README.md               Short technical readme
+|-- node_modules/           Downloaded libraries (created by npm install)
+|-- dist/                   Production build output (created by npm run build)
+|
+|-- src/                    All source code lives here
+    |
+    |-- main.jsx            App entry point: loads React, Router,
+    |                       global CSS and renders <App />
+    |-- App.jsx             All routes (which URL shows which page)
+    |-- style.css           Styling for the app pages
+    |-- login.css           Styling for the login page
+    |
+    |-- components/
+    |   |-- Layout.jsx          Header, sidebar and footer
+    |   |-- ProtectedRoute.jsx  Blocks pages for users who are not
+    |                           logged in or who lack the right role
+    |
+    |-- pages/              All screens of the app
+    |   |-- Login.jsx              Login screen
+    |   |-- AdminDashboard.jsx     Admin dashboard
+    |   |-- Employees.jsx          Employee list
+    |   |-- AddEmployee.jsx        Add employee form
+    |   |-- EditEmployee.jsx       Edit employee form
+    |   |-- Departments.jsx        Department list
+    |   |-- AddDepartment.jsx      Add department form
+    |   |-- AdminProfile.jsx       Admin profile form
+    |   |-- AdminChangePassword.jsx  Admin password change
+    |   |-- EmployeeDashboard.jsx  Employee dashboard
+    |   |-- EmployeeProfile.jsx    Employee profile form
+    |   |-- CompleteProfile.jsx    First-login profile completion
+    |   |-- ChangePassword.jsx     Employee password change
+    |
+    |-- data/
+    |   |-- employees.json     Sample employee records (5 employees)
+    |   |-- departments.json   Sample department records (4 departments)
+    |
+    |-- utils/
+        |-- storage.js        Reads/writes data to localStorage
+        |-- auth.js           Login / logout / role helpers
+        |-- helpers.js        Small helper functions
+
+
+========================================================================
+9. HOW DATA IS SAVED (important for everyone)
+========================================================================
+
+  - The app has NO database and NO backend server.
+  - Everything is saved in the browser using localStorage:
+        employees, departments, admin profile, passwords.
+  - The files employees.json and departments.json contain the
+    starting/sample data. Any change made in the app is stored in
+    the browser and layered on top of that sample data.
+  - Consequences to remember:
+        * Different browsers/computers do NOT share data.
+        * Clearing browser site data resets everything to the
+          sample data.
+        * Refreshing the page does NOT lose data.
+
+
+========================================================================
+10. OTHER USEFUL COMMANDS (run inside the project folder)
+========================================================================
+
+  npm install          Download all required libraries (first time only)
+  npm run dev          Start the development server for testing
+  npm run build        Build a production version into the dist/ folder
+  npm run preview      Preview the production build locally
+  node --version       Check the installed Node.js version
+  npm --version        Check the installed npm version
+
+
+========================================================================
+11. TROUBLESHOOTING (common problems and fixes)
+========================================================================
+
+Problem: "npm is not recognized" / "'npm' is not recognized"
+  Cause: Node.js is not installed or the terminal was not restarted
+         after installing Node.js.
+  Fix:   Install Node.js from https://nodejs.org (LTS), then close
+         the terminal, open it again, and try again.
+
+Problem: "npm.ps1 cannot be loaded because running scripts is
+         disabled on this system" (PowerShell only)
+  Fix 1: Use Command Prompt (cmd) instead of PowerShell.
+  Fix 2: Type npm.cmd instead of npm (example: npm.cmd run dev).
+
+Problem: Port 5173 is in use
+  This is NOT an error - Vite automatically uses the next free port
+  (5174, 5175, ...). Just open the link shown in the terminal.
+
+Problem: Page shows a blank white screen
+  Fix:   - Make sure you opened the link from the terminal output.
+         - Clear the browser cache / hard refresh (Ctrl + Shift + R).
+         - Check the terminal for error messages.
+
+Problem: "Invalid email or password" on the login page
+  Fix:   Use the exact credentials from Section 5 of this document.
+         Admin uses admin@company.com / admin123.
+         Employees use their email and employee123 (or the password
+         set for them).
+
+Problem: All data disappeared / app looks reset
+  Cause: Browser site data (localStorage) was cleared.
+  Note:  This is expected behaviour - there is no server database.
+         Data must be re-entered or the page simply refreshed
+         without clearing site data.
+
+Problem: Changes in code are not showing in the browser
+  Fix:   The dev server has hot reload - save the file and the
+         browser updates automatically. If not, refresh the page.
+
+
+========================================================================
+12. QUICK CHECKLIST FOR A NEW TEAM MEMBER
+========================================================================
+
+  [ ] 1. Install Node.js (LTS) from https://nodejs.org
+  [ ] 2. Open Command Prompt
+  [ ] 3. Go to the project folder:  cd <project-folder-path>
+  [ ] 4. Run:  npm install        (first time only)
+  [ ] 5. Run:  npm run dev
+  [ ] 6. Open the shown link (http://localhost:5173)
+  [ ] 7. Log in with admin@company.com / admin123
+  [ ] 8. To stop the app: press Ctrl + C in the terminal
+
+
+========================================================================
+13. FREQUENTLY ASKED QUESTIONS (FAQ)
+========================================================================
+
+Q: Do we need internet to run this?
+A: No. Once the libraries are installed (npm install), the app runs
+   completely offline on your computer.
+
+Q: Is this app deployed online?
+A: Not by default. It runs locally. To share it with others it must
+   be built (npm run build) and hosted on a server, which needs a
+   separate decision from the team.
+
+Q: Can we connect a real database later?
+A: Yes, but that requires adding a backend (e.g. Node/Express,
+   Spring, etc.). The current version is frontend-only and stores
+   data in localStorage.
+
+Q: Where do I see errors if something breaks?
+A: In the terminal where you ran "npm run dev" (server errors) and
+   in the browser's Developer Tools console (F12 -> Console tab).
+
+Q: Who do I contact for help?
+A: Contact the developer who set up this machine / the project
+   administrator. For password resets inside the demo data, use the
+   admin login.
+
+
+========================================================================
+Document prepared for the office team to understand, run and explain
+the PeopleDesk Employee Management System (React + Vite).
+========================================================================
